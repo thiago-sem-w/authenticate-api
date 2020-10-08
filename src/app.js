@@ -7,6 +7,8 @@ const helmet = require('helmet')
 const cors = require('cors')
 const morgan = require('morgan')
 
+const routes = require('./routes')
+
 const app = express()
 app.set('port', process.env.PORT || 5000)
 
@@ -17,6 +19,8 @@ app.use(express.json())
 if (app.get('env') === 'development') {
 	app.use(morgan('dev'))
 }
+
+app.use(routes)
 
 app.use('*', async (req, res, next) => {
 	res.status(404)
